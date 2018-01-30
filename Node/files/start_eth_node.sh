@@ -1,4 +1,6 @@
 #!/bin/bash
+mkdir /root/data
+mkdir /root/data/keystore
 cp /root/keys/coinbasepwd_$XAIN_NUMBER /root/data
 mv /root/data/coinbasepwd_$XAIN_NUMBER /root/data/coinbasepwd
 cp /root/keys/XAIN_key_$XAIN_NUMBER /root/data/keystore

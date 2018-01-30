@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM debian:stable-slim
 
 RUN apt update -y
 RUN apt upgrade -y
