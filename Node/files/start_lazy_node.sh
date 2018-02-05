@@ -1,10 +1,5 @@
-#!/bin/bash
+#!bin/bash
 
-mkdir /root/data
-mkdir /root/data/keystore
-cp /root/keys/coinbasepwd_$XAIN_NUMBER /root/data
-mv /root/data/coinbasepwd_$XAIN_NUMBER /root/data/coinbasepwd
-cp /root/keys/XAIN_key_$XAIN_NUMBER /root/data/keystore
 cd /root/files || exit
 ./geth --datadir=~/data init "/root/files/blockchain_files/genesis.json"
 BOOTSTRAP_IP=`getent hosts bootstrap | cut -d" " -f1`

@@ -95,7 +95,7 @@ services:
     build: .
     volumes:
       - /home/${USER}/logging:/logging:rw
-    entrypoint: /root/files/start_eth_node.sh
+    entrypoint: /root/files/start_lazy_node.sh
     environment:
         XAIN_NUMBER: -1
     networks:
