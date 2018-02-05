@@ -10,4 +10,4 @@ cd /root/files || exit
 BOOTSTRAP_IP=`getent hosts bootstrap | cut -d" " -f1`
 GETH_OPTS=${@/IPAddress/$BOOTSTRAP_IP}
 python3 /root/files/node.py &
-./geth "$GETH_OPTS"
+./geth $GETH_OPTS
