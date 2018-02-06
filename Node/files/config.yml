@@ -1,4 +1,4 @@
 networking:
   socketProtocol: "wss://"
   socketPort: ""
-  socketAdress: "172.16.64.155:3030"
+  socketAdress: "bpt-lab.org/bp2017w1-backendlistener"
