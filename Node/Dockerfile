@@ -2,7 +2,8 @@ FROM debian:stable-slim
 
 RUN apt update -y
 RUN apt upgrade -y
-RUN apt install git bash python3 musl-dev gcc python3-dev python3-pip dnsutils -y
+RUN apt install git bash python3 musl-dev gcc python3-dev python3-pip dnsutils nodejs -y
+RUN npm install -g truffle
 RUN pip3 install web3 websocket-client pyyaml
 
 COPY keys root/keys
