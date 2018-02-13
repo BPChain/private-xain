@@ -142,7 +142,7 @@ def main():
     send_period = 10
     web3_connector = connect_to_blockchain()
     setup_logging()
-    unlockAccount(web3_connector)
+    #unlockAccount(web3_connector)
     start_mining(web3_connector)
     provide_data_every(send_period, web3_connector)
 
