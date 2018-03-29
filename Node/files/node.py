@@ -9,6 +9,7 @@ import json
 import logging
 import time
 import subprocess
+import sys
 from functools import reduce
 
 import yaml
@@ -28,7 +29,9 @@ def start_mining(web3):
     web3.miner.start(1)
 
 def unlock_account(web3):
-    web3.personal.unlockAccount(web3.eth.accounts[0], "123", 0)
+    file = open("coinbasepwd")
+    coinbasepwd = file.read()
+    web3.personal.unlockAccount(web3.eth.accounts[0], coinbasepwd, 0)
 
 def retrieve_new_blocks_since(number_of_last_sent_block, web3):
     """Gets the newly mined blocks since last send cycle"""
@@ -142,7 +145,7 @@ def main():
     send_period = 10
     web3_connector = connect_to_blockchain()
     setup_logging()
-    #unlock_account(web3_connector)
+    unlock_account(web3_connector)
     start_mining(web3_connector)
     provide_data_every(send_period, web3_connector)
 
