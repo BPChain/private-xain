@@ -10,6 +10,7 @@ import logging
 import time
 import subprocess
 import sys
+import socket
 from functools import reduce
 
 import yaml
@@ -100,7 +101,7 @@ def get_node_data(blocks_to_send, last_sent_block, web3):
     is_mining = 1 if web3.eth.mining else 0
     node_data = {"chain": "xain", "hostId": host_id, "hashrate": hash_rate, "gasPrice": gas_price,
                  "avgDifficulty": avg_block_difficulty, "avgBlocktime": avg_block_time,
-                 "isMining": is_mining}
+                 "isMining": is_mining, "target": socket.gethostname()}
     return node_data
 
 
