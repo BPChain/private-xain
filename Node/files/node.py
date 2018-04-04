@@ -93,7 +93,6 @@ def provide_data(last_block_number, old_node_data, web3, hostname):
 
 
 def get_node_data(blocks_to_send, last_sent_block, web3, hostname):
-    uri = yaml.safe_load(open("/root/files/config.yml"))
     avg_block_difficulty = calculate_avg_block_difficulty(blocks_to_send)
     avg_block_time = calculate_avg_block_time(blocks_to_send, last_sent_block)
     host_id = web3.admin.nodeInfo.id
