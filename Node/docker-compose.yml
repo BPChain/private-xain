@@ -22,13 +22,12 @@ services:
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 0
+        TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - backendnet
     command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
-    environment:
-      TARGET_HOSTNAME: ${HOSTNAME}
 
   xain_node_1:
     build: .
@@ -37,13 +36,13 @@ services:
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 1
+        TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - backendnet
     command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
-    environment:
-      TARGET_HOSTNAME: ${HOSTNAME}
+
 
   xain_node_2:
     build: .
@@ -52,13 +51,12 @@ services:
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 2
+        TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - backendnet
     command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
-    environment:
-      TARGET_HOSTNAME: ${HOSTNAME}
 
   xain_node_3:
     build: .
@@ -67,13 +65,13 @@ services:
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 3
+        TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - backendnet
     command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
-    environment:
-      TARGET_HOSTNAME: ${HOSTNAME}
+
 
   xain_node_4:
     build: .
@@ -82,13 +80,13 @@ services:
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 4
+        TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - backendnet
     command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
-    environment:
-      TARGET_HOSTNAME: ${HOSTNAME}
+
 
   xain_node_5:
     build: .
@@ -97,13 +95,13 @@ services:
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 5
+        TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - backendnet
     command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
-    environment:
-      TARGET_HOSTNAME: ${HOSTNAME}
+
 
   xain_lazy:
     build: .
@@ -112,13 +110,13 @@ services:
     entrypoint: /root/files/start_lazy_node.sh
     environment:
         XAIN_NUMBER: -1
+        TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - backendnet
     command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
-    environment:
-      TARGET_HOSTNAME: ${HOSTNAME}
+
 
 networks:
   backendnet:
