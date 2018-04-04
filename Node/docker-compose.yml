@@ -1,9 +1,9 @@
 version: '2'
 
 services:
-  bootstrap:
+  xain_bootstrap:
     build: .
-    container_name: bootstrap
+    container_name: xain_bootstrap
     entrypoint: /root/files/start_bootstrap.sh
     command: '--datadir=~/data --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --rpcapi "db,personal,eth,net,web3" --rpccorsdomain="*" --networkid=20180123 --rpc --rpcaddr="0.0.0.0"'
     networks:
@@ -107,4 +107,4 @@ services:
 networks:
   backendnet:
     external:
-      name: backendnet
+      name: xain_backendnet
