@@ -9,8 +9,7 @@ import json
 import logging
 import time
 import subprocess
-import sys
-import socket
+import os
 from functools import reduce
 
 import yaml
