@@ -1,6 +1,7 @@
 const ws = require('ws')
 const WebSocketServer = ws.Server
 const execa = require("execa")
+const Web3 = require('web3')
 
 const METAScenario = artifacts.require("../contracts/METAScenario.sol");
 
