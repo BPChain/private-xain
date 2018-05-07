@@ -6,7 +6,9 @@ module.exports = function(deployer) {
   setInterval(function() {
         try {
           if(provider.eth.getBalance(eth.accounts[0]) > 100000) {
+              console.log("%%%%%%%%%%%%%%%%%%%%%%%%%Before clear%%%%%%%%%%%%%%%%%")
               clearInterval();
+              console.log("%%%%%%%%%%%%%%%%%%%%%%%%%After clear%%%%%%%%%%%%%%%%")
               provider.miner.stop();
               provider.eth.defaultAccount = provider.eth.accounts[0];
               provider.personal.unlockAccount(eth.accounts[0], "1234567890");
