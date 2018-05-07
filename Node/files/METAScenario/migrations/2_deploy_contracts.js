@@ -7,7 +7,7 @@ const METAScenario = artifacts.require("../contracts/METAScenario.sol");
 
 module.exports = function (deployer) {
     var address
-    var provider = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8547"));
+    var provider = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
     provider.eth.getBalance("46dfb921f8f7edbbd8100458b7c1beefeabf6e15")
     provider.personal.unlockAccount(provider.eth.accounts[0], "1234567890");
 
