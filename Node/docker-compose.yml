@@ -105,6 +105,4 @@ services:
 
 
 networks:
-  backendnet:
-    external:
-      name: xain_backendnet
+  xain_backendnet:
