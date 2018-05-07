@@ -5,7 +5,7 @@ services:
     build: .
     container_name: xain_bootstrap
     entrypoint: /root/files/start_bootstrap.sh
-    command: '--datadir=~/data --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --rpcapi "db,personal,eth,net,web3" --rpccorsdomain="*" --networkid=20180123 --rpc --rpcaddr="0.0.0.0"'
+    command: '--datadir=~/data --nodekeyhex=091bd6067cb4612df85d9c1ff85cc47f259ced4d4cd99816b14f35650f59c322 --verbosity 2 --rpcapi "db,personal,eth,net,web3" --rpccorsdomain="*" --networkid=20180123 --rpc --rpcaddr="0.0.0.0"'
     networks:
       - xain_backendnet
     ports:
@@ -23,7 +23,7 @@ services:
         TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - xain_backendnet
-    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
+    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --verbosity 2 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
 
@@ -35,7 +35,7 @@ services:
         TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - xain_backendnet
-    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
+    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --verbosity 2 --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
 
@@ -48,7 +48,7 @@ services:
         TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - xain_backendnet
-    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
+    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --verbosity 2 --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
 
@@ -60,7 +60,7 @@ services:
         TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - xain_backendnet
-    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
+    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --verbosity 2 --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
 
@@ -73,7 +73,7 @@ services:
         TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - xain_backendnet
-    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
+    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --verbosity 2 --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
 
@@ -86,7 +86,7 @@ services:
         TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - xain_backendnet
-    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
+    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --verbosity 2 --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
 
@@ -99,7 +99,7 @@ services:
         TARGET_HOSTNAME: ${HOSTNAME}
     networks:
       - xain_backendnet
-    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
+    command: '--datadir=~/data --rpccorsdomain="http://127.0.0.1:8545" --networkid=20180123 --rpc --verbosity 2 --rpcapi "db,personal,eth,net,web3,miner,admin" --bootnodes="enode://288b97262895b1c7ec61cf314c2e2004407d0a5dc77566877aad1f2a36659c8b698f4b56fd06c4a0c0bf007b4cfb3e7122d907da3b005fa90e724441902eb19e@IPAddress:30303"'
     stdin_open: true
     tty: true
 
