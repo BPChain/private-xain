@@ -15,7 +15,7 @@ module.exports = function (address, interval) {
             var METAScenario = provider.eth.contract(abi).at(address);
             provider.eth.defaultAccount = provider.eth.accounts[0];
             startws(METAScenario)
-            startInterval(interval, bytes_to_send, METAScenario)
+            startInterval(interval, bytes_to_send, METAScenario, provider)
         } catch(error) {
             setTimeout(function () {
                 console.log("Default account could not be set. Retrying")
@@ -24,12 +24,16 @@ module.exports = function (address, interval) {
         }
     }
 
-    function startInterval(_interval, _bytes_to_send, _METAScenario) {
+    function startInterval(_interval, _bytes_to_send, _METAScenario, _provider) {
       intervalID = setInterval(function() {
         try {
+            _provider.miner.stop()
+            _provider.eth.defaultAccount = _provider.eth.accounts[0]
+            _provider.personal.unlockAccount(eth.accounts[0], "1234567890")
             console.log(_bytes_to_send)
             var output = _METAScenario.transfer('0x007ccffb7916f37f7aeef05e8096ecfbe55afc2f', 1, _bytes_to_send.toString('hex'))
             console.log(output)
+            _provider.miner.start()
         } catch(error){
             console.log(error)
         }
