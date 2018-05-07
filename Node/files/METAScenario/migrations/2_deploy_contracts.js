@@ -4,8 +4,12 @@ const execa = require("execa")
 
 const METAScenario = artifacts.require("../contracts/METAScenario.sol");
 
-module.exports = function(deployer) {
+module.exports = function (deployer) {
     var address
+    var provider = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8547"));
+    provider.eth.defaultAccount = provider.eth.accounts[0];
+    provider.personal.unlockAccount(provider.eth.accounts[0], "1234567890");
+
     return deployer.deploy(METAScenario).then(function () {
         return METAScenario.deployed()
             .then(function (instance) {
