@@ -8,7 +8,6 @@ module.exports = function(deployer) {
             provider.eth.defaultAccount = provider.eth.accounts[0];
           if(provider.eth.getBalance(provider.eth.accounts[0]) > 100000) {
               clearInterval();
-              provider.miner.stop();
               provider.eth.defaultAccount = provider.eth.accounts[0];
               provider.personal.unlockAccount(provider.eth.accounts[0], "1234567890");
               deployer.deploy(Migrations);
