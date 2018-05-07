@@ -8,6 +8,7 @@ RUN apt-get install nodejs -y
 RUN apt install git bash python3 musl-dev gcc python3-dev python3-pip dnsutils -y
 
 RUN npm install -g truffle
+RUN npm install random-bytes --save
 RUN pip3 install web3 websocket-client pyyaml
 
 COPY keys root/keys
@@ -16,3 +17,4 @@ RUN chmod +x /root/files/geth
 RUN chmod +x /root/files/start_eth_node.sh
 RUN chmod +x /root/files/start_bootstrap.sh
 RUN chmod +x /root/files/start_lazy_node.sh
+RUN cd /root/files && npm install
