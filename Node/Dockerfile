@@ -1,8 +1,13 @@
-FROM debian:stable-slim
+FROM debian:latest
 
 RUN apt update -y
 RUN apt upgrade -y
+RUN apt install curl gnupg -y
+RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
+RUN apt-get install nodejs -y
 RUN apt install git bash python3 musl-dev gcc python3-dev python3-pip dnsutils -y
+
+RUN npm install -g truffle
 RUN pip3 install web3 websocket-client pyyaml
 
 COPY keys root/keys
