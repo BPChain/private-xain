@@ -11,4 +11,7 @@ cd /root/files || exit
 XAIN_BOOTSTRAP_IP=`getent hosts xain_bootstrap | cut -d" " -f1`
 GETH_OPTS=${@/IPAddress/$XAIN_BOOTSTRAP_IP}
 python3 /root/files/node.py &
-./geth $GETH_OPTS
+./geth $GETH_OPTS &
+cd /root/files/METAScenario;node startMigration.js &
+cd /root/files;node chain_configuration.js
+
