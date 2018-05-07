@@ -17,8 +17,6 @@ services:
 
   xain_node_0:
     build: .
-    volumes:
-      - /home/${USER}/logging:/logging:rw
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 0
@@ -31,8 +29,6 @@ services:
 
   xain_node_1:
     build: .
-    volumes:
-      - /home/${USER}/logging:/logging:rw
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 1
@@ -46,8 +42,6 @@ services:
 
   xain_node_2:
     build: .
-    volumes:
-      - /home/${USER}/logging:/logging:rw
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 2
@@ -60,8 +54,6 @@ services:
 
   xain_node_3:
     build: .
-    volumes:
-      - /home/${USER}/logging:/logging:rw
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 3
@@ -75,8 +67,6 @@ services:
 
   xain_node_4:
     build: .
-    volumes:
-      - /home/${USER}/logging:/logging:rw
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 4
@@ -90,8 +80,6 @@ services:
 
   xain_node_5:
     build: .
-    volumes:
-      - /home/${USER}/logging:/logging:rw
     entrypoint: /root/files/start_eth_node.sh
     environment:
         XAIN_NUMBER: 5
@@ -105,8 +93,6 @@ services:
 
   xain_lazy:
     build: .
-    volumes:
-      - /home/${USER}/logging:/logging:rw
     entrypoint: /root/files/start_lazy_node.sh
     environment:
         XAIN_NUMBER: -1
