@@ -8,7 +8,6 @@ setTimeout(function () {
         }, 1000)
 function start() {
     try {
-
         console.log("#################################")
         var account = web3.eth.accounts[0];
         if(web3.eth.getBalance(account) > 100000) {
@@ -28,10 +27,14 @@ function start() {
                     web3.miner.start();
                     setInterval(function () {
                         if (typeof contract.address !== 'undefined') {
-                        console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
-                        clearInterval()
-                    }
-                    else{
+                            console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
+                            const wsServer = new WebSocketServer({port: 40000})
+                            wsServer.on('connection', function (connection) {
+                                connection.send(contract.address)
+                            })
+                            clearInterval()
+                        }
+                        else {
                             console.log("Contract is undefined")
                         }
                     }, 30000)
