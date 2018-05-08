@@ -50,7 +50,7 @@ function mineContract(metascenarioContract) {
                         connection.send(contract.address)
                     })
                 }
-            }
+            })
     else
         {
             console.log("Contract is undefined")
