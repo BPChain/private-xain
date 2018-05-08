@@ -36,6 +36,7 @@ function start() {
 
     } catch(error) {
         console.log("%%%%%%%%%%%%%%%%Failed%%%%%%%%%%%%%%%%")
+        console.log(error)
          setTimeout(function () {
                 start()
             }, 10000)
