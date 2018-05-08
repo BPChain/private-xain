@@ -50,14 +50,13 @@ function mineContract(metascenarioContract) {
                         connection.send(contract.address)
                     })
                 }
+                else {
+                    console.log("Contract is undefined")
+                    setTimeout(function () {
+                        mineContract(contract)
+                    }, 10000)
+                }
             })
-    else
-        {
-            console.log("Contract is undefined")
-            setTimeout(function () {
-                mineContract(contract)
-            }, 10000)
-        }
     } catch (error) {
         console.log(error)
         setTimeout(function () {
