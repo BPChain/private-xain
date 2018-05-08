@@ -23,11 +23,11 @@ function start() {
      gas: '4700000'
             }, function (e, contract) {
                 web3.miner.start();
-                if (!err) {
+                if (!e) {
                 }
 
 
-                if (!myContract.address) {
+                if (!contract.address) {
                     console.log("no address yes")
                     console.log(contract.transactionHash)
                 } else {
