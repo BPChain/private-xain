@@ -5,8 +5,8 @@ var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 function start() {
     try {
         console.log("#################################")
-        var acc = web3.eth.accounts;
-        console.log(acc);
+        var account = web3.eth.accounts[0];
+        console.log(account);
 
 
     } catch(error) {
