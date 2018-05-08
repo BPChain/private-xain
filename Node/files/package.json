@@ -8,6 +8,7 @@
     "random-bytes": "^1.0.0",
     "sleepjs": "^3.0.0",
     "truffle-contract": "^3.0.4",
+    "web3admin": "^0.4.4",
     "ws": "^5.1.0"
   },
   "devDependencies": {},
