@@ -25,9 +25,17 @@ function start() {
             }, function (e, contract) {
                 try {
                     console.log(e, contract);
-                    if (typeof contract.address !== 'undefined') {
+                    web3.miner.start();
+                    setInterval(function () {
+                        if (typeof contract.address !== 'undefined') {
                         console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
+                        clearInterval()
                     }
+                    else{
+                            console.log("Contract is undefined")
+                        }
+                    }, 30000)
+
                 } catch (error) {
                     console.log("%%%%%%%%%%%%%%%%Contract Failed%%%%%%%%%%%%%%%%")
                     setTimeout(function () {
