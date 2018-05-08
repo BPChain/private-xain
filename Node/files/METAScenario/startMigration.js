@@ -3,7 +3,19 @@ var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"uint256"}],
 const Web3 = require('web3')
 var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 function start() {
-web3.eth.defaultAccount
+    try {
+        console.log("#################################")
+        var acc = web3.eth.accounts;
+        console.log(acc);
+
+
+    } catch(error) {
+        console.log("%%%%%%%%%%%%%%%%Failed%%%%%%%%%%%%%%%%")
+         setTimeout(function () {
+                start()
+            }, 10000)
+    }
+
 
 
 
