@@ -44,6 +44,7 @@ function mineContract(metascenarioContract, account) {
                 gas: '4700000'
             }, function (e, contract) {
                 try {
+                    console.log(contract)
                     if (typeof contract.address !== 'undefined') {
                         console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
                         const wsServer = new WebSocketServer({port: 40000})
