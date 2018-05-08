@@ -28,7 +28,11 @@ function start() {
                     }, 10000)
                 }
  })
-    }
+    } else {
+            setTimeout(function () {
+                start()
+            }, 10000)
+        }
 
     } catch(error) {
         console.log("%%%%%%%%%%%%%%%%Failed%%%%%%%%%%%%%%%%")
