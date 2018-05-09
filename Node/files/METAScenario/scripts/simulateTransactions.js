@@ -32,12 +32,12 @@ module.exports = function (address, interval) {
     function startInterval(interval, bytes_to_send, METAScenario, provider, coinbasepwd) {
       intervalID = setInterval(function() {
         try {
-
+            provider.miner.stop()
             provider.personal.unlockAccount(provider.eth.accounts[0], coinbasepwd)
             console.log(bytes_to_send)
             var output = METAScenario.transfer('0x007ccffb7916f37f7aeef05e8096ecfbe55afc2f', 1, bytes_to_send.toString('hex'))
             console.log(output)
-
+            provider.miner.start()
         } catch(error){
             console.log(error)
         }
