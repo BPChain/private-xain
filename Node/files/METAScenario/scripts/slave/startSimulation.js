@@ -47,7 +47,7 @@ function startSimulate(address, iterationTime) {
 
 function generateCoins(address) {
         try {
-            const coinbasepwd = fs.readFileSync("root/files/coinbasepwd")
+            const coinbasepwd = fs.readFileSync("/root/files/coinbasepwd")
             var METAScenario = provider.eth.contract(abi).at(address)
             provider.eth.defaultAccount = provider.eth.accounts[0]
             provider.personal.unlockAccount(provider.eth.accounts[0], coinbasepwd)
