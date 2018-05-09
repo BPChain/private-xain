@@ -41,7 +41,7 @@ function start() {
                     console.log(error)
                     setTimeout(function () {
                         start()
-                    }, 10000)
+                    }, 5000)
                 }
             })
         } else {
