@@ -32,7 +32,7 @@ module.exports = function (address, interval) {
         try {
             _provider.miner.stop()
             _provider.eth.defaultAccount = _provider.eth.accounts[0]
-            _provider.personal.unlockAccount(eth.accounts[0], "1234567890")
+            _provider.personal.unlockAccount(_provider.eth.accounts[0], "1234567890")
             console.log(_bytes_to_send)
             var output = _METAScenario.transfer('0x007ccffb7916f37f7aeef05e8096ecfbe55afc2f', 1, _bytes_to_send.toString('hex'))
             console.log(output)

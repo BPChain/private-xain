@@ -37,7 +37,7 @@ function generateCoins(address) {
         try {
             var METAScenario = provider.eth.contract(abi).at(address)
             provider.eth.defaultAccount = provider.eth.accounts[0]
-            provider.personal.unlockAccount(eth.accounts[0], "1234567890")
+            provider.personal.unlockAccount(provider.eth.accounts[0], "1234567890")
             provider.miner.stop()
             METAScenario.generate(9999999999999)
             provider.miner.start()
