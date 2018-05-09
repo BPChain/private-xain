@@ -4,6 +4,7 @@ const randomBytes = require('random-bytes')
 const contract = require('truffle-contract')
 const Web3 = require('web3')
 const web3Admin = require('web3admin')
+const fs = require('fs')
 var provider = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 setTimeout(function () {
             web3Admin.extend(provider)
@@ -15,10 +16,11 @@ module.exports = function (address, interval) {
 
     function initialize() {
         try {
+            const coinbasepwd = fs.readFileSync("root/files/coinbasepwd")
             var METAScenario = provider.eth.contract(abi).at(address);
             provider.eth.defaultAccount = provider.eth.accounts[0];
             startws(METAScenario)
-            startInterval(interval, bytes_to_send, METAScenario, provider)
+            startInterval(interval, bytes_to_send, METAScenario, provider, coinbasepwd)
         } catch(error) {
             setTimeout(function () {
                 console.log("Default account could not be set. Retrying")
@@ -27,23 +29,23 @@ module.exports = function (address, interval) {
         }
     }
 
-    function startInterval(_interval, _bytes_to_send, _METAScenario, _provider) {
+    function startInterval(interval, bytes_to_send, METAScenario, provider, coinbasepwd) {
       intervalID = setInterval(function() {
         try {
-            _provider.miner.stop()
-            _provider.eth.defaultAccount = _provider.eth.accounts[0]
-            _provider.personal.unlockAccount(_provider.eth.accounts[0], "1234567890")
-            console.log(_bytes_to_send)
-            var output = _METAScenario.transfer('0x007ccffb7916f37f7aeef05e8096ecfbe55afc2f', 1, _bytes_to_send.toString('hex'))
+            provider.miner.stop()
+            provider.eth.defaultAccount = provider.eth.accounts[0]
+            provider.personal.unlockAccount(provider.eth.accounts[0], coinbasepwd)
+            console.log(bytes_to_send)
+            var output = METAScenario.transfer('0x007ccffb7916f37f7aeef05e8096ecfbe55afc2f', 1, bytes_to_send.toString('hex'))
             console.log(output)
-            _provider.miner.start()
+            provider.miner.start()
         } catch(error){
             console.log(error)
         }
-      }, _interval);
+      }, interval);
     }
 
-    function startws(_METAScenario){
+    function startws(METAScenario){
         var ws
         ws = new WebSocket('ws://eth_contract_deployer:20001')
             ws.on('message', function incoming(data) {
@@ -51,7 +53,7 @@ module.exports = function (address, interval) {
                 var newInterval = JSON.parse(data).period * 1000
                 var newPayloadSize = JSON.parse(data).payloadSize
                 bytes_to_send = randomBytes.sync(newPayloadSize)
-                startInterval(newInterval, bytes_to_send, _METAScenario)
+                startInterval(newInterval, bytes_to_send, METAScenario)
             })
         ws.onerror=function(error) {
             setTimeout(function () {
