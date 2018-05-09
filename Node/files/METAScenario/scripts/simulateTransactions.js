@@ -33,7 +33,6 @@ module.exports = function (address, interval) {
       intervalID = setInterval(function() {
         try {
             provider.miner.stop()
-            provider.eth.defaultAccount = provider.eth.accounts[0]
             provider.personal.unlockAccount(provider.eth.accounts[0], coinbasepwd)
             console.log(bytes_to_send)
             var output = METAScenario.transfer('0x007ccffb7916f37f7aeef05e8096ecfbe55afc2f', 1, bytes_to_send.toString('hex'))
