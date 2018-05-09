@@ -3,7 +3,11 @@ const WebSocket = require('ws')
 const randomBytes = require('random-bytes')
 const contract = require('truffle-contract')
 const Web3 = require('web3')
-
+const web3Admin = require('web3admin')
+var provider = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
+setTimeout(function () {
+            web3Admin.extend(provider)
+        }, 1000)
 module.exports = function (address, interval) {
     var bytes_to_send = randomBytes.sync(1)
     var intervalID
@@ -11,7 +15,6 @@ module.exports = function (address, interval) {
 
     function initialize() {
         try {
-            var provider = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
             var METAScenario = provider.eth.contract(abi).at(address);
             provider.eth.defaultAccount = provider.eth.accounts[0];
             startws(METAScenario)
