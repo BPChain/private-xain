@@ -12,7 +12,7 @@ function start() {
     try {
         console.log("#################################")
         var account = web3.eth.accounts[0];
-        if(web3.eth.getBalance(account) > 100000) {
+        if(web3.eth.getBalance(account) > 9999999999) {
             console.log("Stopping mining")
             web3.miner.stop();
             web3.eth.defaultAccount = account
