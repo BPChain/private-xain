@@ -16,7 +16,7 @@ module.exports = function (address, interval) {
 
     function initialize() {
         try {
-            const coinbasepwd = fs.readFileSync("/root/files/coinbasepwd")
+            const coinbasepwd = fs.readFileSync("/root/files/coinbasepwd", "utf8")
             var METAScenario = provider.eth.contract(abi).at(address);
             provider.eth.defaultAccount = provider.eth.accounts[0];
             startws(METAScenario)
