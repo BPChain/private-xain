@@ -31,7 +31,9 @@ function start() {
 }
 
 function startSimulate(address, iterationTime) {
-    if (provider.eth.getBalance(provider.eth.accounts[0]) > 100000) {
+    console.log("BALANCE")
+    console.log(provider.eth.accounts[0])
+    if (provider.eth.getBalance(provider.eth.accounts[0]) > 9999999999) {
         generateCoins(address)
         setTimeout(function () {
             require("./simulateTransactions")(address, iterationTime)
