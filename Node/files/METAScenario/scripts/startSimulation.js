@@ -51,8 +51,8 @@ function generateCoins(address) {
             coinbasepwd = coinbasepwd.replace("\n", "")
             var METAScenario = provider.eth.contract(abi).at(address)
             provider.eth.defaultAccount = account
-            provider.personal.unlockAccount(account, coinbasepwd)
             provider.miner.stop()
+            provider.personal.unlockAccount(account, coinbasepwd)
             METAScenario.generate(9999999999999)
             provider.miner.start()
             setTimeout(function () {
