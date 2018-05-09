@@ -5,7 +5,7 @@ var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"uint256"}],
 
 function start() {
   var ws
-    ws = new WebSocket('ws://eth_contract_deployer:40000')
+    ws = new WebSocket('ws://xain_contract_deployer:40000')
      ws.on('message', function incoming(address) {
           console.log("-------------------------Address-------------")
           console.log(address)
