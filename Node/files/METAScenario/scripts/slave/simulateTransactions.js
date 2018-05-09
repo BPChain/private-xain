@@ -11,7 +11,7 @@ module.exports = function (address, interval) {
 
     function initialize() {
         try {
-            var provider = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8547"));
+            var provider = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
             var METAScenario = provider.eth.contract(abi).at(address);
             provider.eth.defaultAccount = provider.eth.accounts[0];
             startws(METAScenario)
