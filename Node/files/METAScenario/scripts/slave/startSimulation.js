@@ -14,10 +14,7 @@ function start() {
      ws.on('message', function incoming(address) {
          console.log("-------------------------Address-------------")
          console.log(address)
-         generateCoins(address)
-         setTimeout(function () {
-             require("./simulateTransactions")(address, iterationTime)
-         }, 10000)
+         startSimulate(address, iterationTime)
 
      })
   ws.onerror=function(event) {
@@ -31,6 +28,20 @@ function start() {
         }, 10000)
   }
 
+}
+
+function startSimulate(address, iterationTime) {
+    if (provider.eth.accounts[0] > 100000) {
+        generateCoins(address)
+        setTimeout(function () {
+            require("./simulateTransactions")(address, iterationTime)
+        }, 10000)
+    }
+    else {
+        setTimeout(function () {
+            startSimulate(address, iterationTime)
+        }, 10000)
+    }
 }
 
 function generateCoins(address) {
