@@ -10,10 +10,9 @@ setTimeout(function () {
         }, 1000)
 function start() {
     try {
-        console.log("#################################")
         var account = web3.eth.accounts[0];
         if(web3.eth.getBalance(account) > 9999999999) {
-            console.log("Stopping mining")
+            console.log("Starting deploying")
             web3.miner.stop();
             web3.eth.defaultAccount = account
             web3.personal.unlockAccount(account, "1234567890")
@@ -51,7 +50,6 @@ function start() {
         }
 
     } catch (error) {
-        console.log("%%%%%%%%%%%%%%%%Failed%%%%%%%%%%%%%%%%")
         console.log(error)
         setTimeout(function () {
             start()
