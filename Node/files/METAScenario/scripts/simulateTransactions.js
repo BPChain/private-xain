@@ -19,6 +19,7 @@ module.exports = function (address, interval) {
             coinbasepwd = coinbasepwd.replace("\n", "")
             var METAScenario = provider.eth.contract(abi).at(address);
             provider.eth.defaultAccount = provider.eth.accounts[0];
+            provider.personal.unlockAccount(provider.eth.accounts[0], coinbasepwd, 0)
             startws(METAScenario)
             startInterval(interval, bytes_to_send, METAScenario, provider, coinbasepwd)
         } catch(error) {
@@ -33,7 +34,6 @@ module.exports = function (address, interval) {
       intervalID = setInterval(function() {
         try {
             provider.miner.stop()
-            provider.personal.unlockAccount(provider.eth.accounts[0], coinbasepwd)
             console.log(bytes_to_send)
             var output = METAScenario.transfer('0x007ccffb7916f37f7aeef05e8096ecfbe55afc2f', 1, bytes_to_send.toString('hex'))
             console.log(output)
