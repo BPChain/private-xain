@@ -8,13 +8,16 @@ function start() {
   var ws
     ws = new WebSocket('ws://xain_contract_deployer:40000')
      ws.on('message', function incoming(address) {
-          console.log("-------------------------Address-------------")
-          console.log(address)
-             generateCoins(address)
-          require("./simulateTransactions")(address, iterationTime)
+         console.log("-------------------------Address-------------")
+         console.log(address)
+         generateCoins(address)
+         setTimeout(function () {
+             require("./simulateTransactions")(address, iterationTime)
+         }, 10000)
+
      })
   ws.onerror=function(event) {
-          console.log("Contract address WebSocket not reachable");
+          console.log("Contract address WebSocket not reachable")
           ws.close()
   }
 
@@ -27,12 +30,22 @@ function start() {
 }
 
 function generateCoins(address) {
-
-        var METAScenario = provider.eth.contract(abi).at(address);
-        METAScenario.generate(99999999999)
-             setTimeout(function () {
+        try {
+            var METAScenario = provider.eth.contract(abi).at(address)
+            provider.eth.defaultAccount = provider.eth.accounts[0]
+            provider.personal.unlockAccount(eth.accounts[0], "1234567890")
+            provider.miner.stop()
+            METAScenario.generate(9999999999999)
+            provider.miner.start()
+            setTimeout(function () {
                 generateCoins(address)
-            }, 10000)
+            }, 1000000)
+        } catch(error) {
+            console.log("An error occured during generating coins")
+            setTimeout(function () {
+                generateCoins(address)
+            }, 1000000)
+        }
 
 
 }
