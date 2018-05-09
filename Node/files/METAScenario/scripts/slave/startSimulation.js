@@ -31,7 +31,7 @@ function start() {
 }
 
 function startSimulate(address, iterationTime) {
-    if (provider.eth.accounts[0] > 100000) {
+    if (provider.eth.getBalance(provider.eth.accounts[0] > 100000)) {
         generateCoins(address)
         setTimeout(function () {
             require("./simulateTransactions")(address, iterationTime)
@@ -59,6 +59,7 @@ function generateCoins(address) {
                 generateCoins(address)
             }, 1000000)
         } catch(error) {
+            provider.miner.start()
             console.log("An error occured during generating coins")
             console.log(error)
             setTimeout(function () {
