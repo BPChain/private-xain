@@ -17,7 +17,7 @@ services:
 
   xain_node_0:
     build: .
-    entrypoint: /root/files/start_eth_node.sh
+    entrypoint: /root/files/start_xain_node.sh
     environment:
         XAIN_NUMBER: 0
         TARGET_HOSTNAME: ${HOSTNAME}
@@ -29,7 +29,7 @@ services:
 
   xain_node_1:
     build: .
-    entrypoint: /root/files/start_eth_node.sh
+    entrypoint: /root/files/start_xain_node.sh
     environment:
         XAIN_NUMBER: 1
         TARGET_HOSTNAME: ${HOSTNAME}
@@ -42,7 +42,7 @@ services:
 
   xain_node_2:
     build: .
-    entrypoint: /root/files/start_eth_node.sh
+    entrypoint: /root/files/start_xain_node.sh
     environment:
         XAIN_NUMBER: 2
         TARGET_HOSTNAME: ${HOSTNAME}
@@ -54,7 +54,7 @@ services:
 
   xain_node_3:
     build: .
-    entrypoint: /root/files/start_eth_node.sh
+    entrypoint: /root/files/start_xain_node.sh
     environment:
         XAIN_NUMBER: 3
         TARGET_HOSTNAME: ${HOSTNAME}
@@ -67,7 +67,7 @@ services:
 
   xain_node_4:
     build: .
-    entrypoint: /root/files/start_eth_node.sh
+    entrypoint: /root/files/start_xain_node.sh
     environment:
         XAIN_NUMBER: 4
         TARGET_HOSTNAME: ${HOSTNAME}
@@ -80,7 +80,7 @@ services:
 
   xain_node_5:
     build: .
-    entrypoint: /root/files/start_eth_node.sh
+    entrypoint: /root/files/start_xain_node.sh
     environment:
         XAIN_NUMBER: 5
         TARGET_HOSTNAME: ${HOSTNAME}
