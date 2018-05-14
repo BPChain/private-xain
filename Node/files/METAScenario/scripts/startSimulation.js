@@ -1,5 +1,4 @@
 const WebSocket = require('ws');
-const iterationTime = process.argv[2]
 const execa = require("execa")
 const Web3 = require('web3')
 const web3Admin = require('web3admin')
@@ -15,7 +14,7 @@ function start() {
      ws.on('message', function incoming(address) {
          console.log("-------------------------Address-------------")
          console.log(address)
-         startSimulate(address, iterationTime)
+         startSimulate(address)
 
      })
   ws.onerror=function(event) {
@@ -31,16 +30,16 @@ function start() {
 
 }
 
-function startSimulate(address, iterationTime) {
+function startSimulate(address) {
     if ((provider.eth.getBalance(provider.eth.accounts[0]).toString(10)) > requiredBalance) {
         generateCoins(address)
         setTimeout(function () {
-            require("./simulateTransactions")(address, iterationTime)
+            require("./simulateTransactions")(address)
         }, 10000)
     }
     else {
         setTimeout(function () {
-            startSimulate(address, iterationTime)
+            startSimulate(address)
         }, 10000)
     }
 }

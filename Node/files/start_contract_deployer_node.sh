@@ -13,5 +13,7 @@ GETH_OPTS=${@/IPAddress/$XAIN_BOOTSTRAP_IP}
 python3 /root/files/node.py &
 ./geth $GETH_OPTS &
 cd /root/files/METAScenario;node startMigration.js &
-cd /root/files;node chain_configuration.js
+cd /root/files/METAScenario/scripts
+python3 -m python_sources.master_node.run_scenario_service
+
 
