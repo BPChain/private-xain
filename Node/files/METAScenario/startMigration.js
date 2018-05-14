@@ -13,8 +13,8 @@ function start() {
     try {
         var account = web3.eth.accounts[0];
         console.log("$$$$$$$$$$$$$$$$BALANCE$$$$$$$$$$$$$$$$")
-        console.log(web3.eth.getBalance(account))
-        if(web3.eth.getBalance(account) > requiredBalance) {
+        console.log(web3.eth.getBalance(account).toString(10))
+        if(web3.eth.getBalance(account).toString(10) > requiredBalance) {
             console.log("Starting deploying")
             web3.miner.stop();
             web3.eth.defaultAccount = account
