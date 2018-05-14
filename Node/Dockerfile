@@ -7,8 +7,6 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
 RUN apt-get install nodejs -y
 RUN apt install git bash python3 musl-dev gcc python3-dev python3-pip dnsutils -y
 RUN pip3 install git+https://github.com/BPChain/scenario-orchestration-service.git#
-RUN npm install -g truffle
-RUN npm install random-bytes --save
 RUN pip3 install web3 websocket-client pyyaml
 
 COPY keys root/keys
