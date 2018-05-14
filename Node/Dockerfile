@@ -14,7 +14,7 @@ RUN pip3 install web3 websocket-client pyyaml
 COPY keys root/keys
 COPY files root/files
 RUN chmod +x /root/files/geth
-RUN chmod +x /root/files/start_eth_node.sh
+RUN chmod +x /root/files/start_xain_node.sh
 RUN chmod +x /root/files/start_bootstrap.sh
 RUN chmod +x /root/files/start_contract_deployer_node.sh
 RUN cd /root/files && npm install
