@@ -12,8 +12,6 @@ setTimeout(function () {
 function start() {
     try {
         var account = web3.eth.accounts[0];
-        console.log("$$$$$$$$$$$$$$$$BALANCE$$$$$$$$$$$$$$$$")
-        console.log(web3.eth.getBalance(account).toString(10))
         if(web3.eth.getBalance(account).toString(10) > requiredBalance) {
             console.log("Starting deploying")
             web3.miner.stop();
@@ -37,11 +35,14 @@ function start() {
                     else if (!contract.address) {
                         console.log("no address yet")
                     } else {
-                        console.log(contract.address)
-                        const wsServer = new WebSocketServer({port: 40000})
-                        wsServer.on('connection', function (connection) {
-                            connection.send(contract.address)
-                        })
+                        try {
+                            console.log(contract.address)
+                            startWebSocket(contract.address)
+                        } catch (error) {
+                            setTimeout(function () {
+                                startWebSocket(contract.address)
+                            }, 10000)
+                        }
                     }
                 })
         } else {
@@ -57,6 +58,23 @@ function start() {
         }, 10000)
     }
 
+
+}
+
+function startWebSocket(contractAddress) {
+    const wsServer = new WebSocketServer({port: 40000})
+    wsServer.on('connection', function (connection) {
+        connection.send(contract.address)
+    })
+    ws.onerror = function (event) {
+        console.log("Contract address WebSocket not reachable")
+        ws.close()
+    }
+    ws.onclose = function (event) {
+        setTimeout(function () {
+            startWebSocket(contractAddress)
+        }, 10000)
+    }
 
 }
 
