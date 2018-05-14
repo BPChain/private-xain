@@ -32,7 +32,7 @@ function start() {
 }
 
 function startSimulate(address, iterationTime) {
-    if (provider.eth.getBalance(provider.eth.accounts[0]) > requiredBalance) {
+    if (provider.eth.getBalance(provider.eth.accounts[0]).toString(10) > requiredBalance) {
         generateCoins(address)
         setTimeout(function () {
             require("./simulateTransactions")(address, iterationTime)
