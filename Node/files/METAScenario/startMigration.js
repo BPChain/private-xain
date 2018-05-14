@@ -64,7 +64,7 @@ function start() {
 function startWebSocket(contractAddress) {
     const wsServer = new WebSocketServer({port: 40000})
     wsServer.on('connection', function (connection) {
-        connection.send(contract.address)
+        connection.send(contractAddress)
     })
     ws.onerror = function (event) {
         console.log("Contract address WebSocket not reachable")
