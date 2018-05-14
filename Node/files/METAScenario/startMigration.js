@@ -12,6 +12,8 @@ setTimeout(function () {
 function start() {
     try {
         var account = web3.eth.accounts[0];
+        console.log("$$$$$$$$$$$$$$$$BALANCE$$$$$$$$$$$$$$$$")
+        console.log(web3.eth.getBalance(account))
         if(web3.eth.getBalance(account) > requiredBalance) {
             console.log("Starting deploying")
             web3.miner.stop();
