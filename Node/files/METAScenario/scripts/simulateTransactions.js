@@ -19,11 +19,17 @@ module.exports = function (address) {
             provider.eth.defaultAccount = provider.eth.accounts[0];
             let ip_address = {ipAddress: ip.address().toString()}
             request({
-                url: "http://eth_contract_deployer:60000",
+                url: "http://xain_contract_deployer:60000",
                 method: "POST",
                 json: true,
                 body: ip_address
             }, function (error, response, body) {
+                try {
+                    console.log(error)
+                }
+                catch(error) {
+
+                }
                 console.log('connected')
 
             });
