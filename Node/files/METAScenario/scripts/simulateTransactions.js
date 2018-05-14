@@ -33,7 +33,7 @@ module.exports = function (address) {
                 console.log('connected')
 
             });
-            startws(METAScenario)
+            startws(METAScenario, coinbasepwd)
         }
         catch
             (error) {
@@ -45,7 +45,7 @@ module.exports = function (address) {
     }
 
 
-    function startws(_METAScenario) {
+    function startws(_METAScenario, coinbasepwd) {
         console.log('!!!!! Started Websocket')
         let wsServer= new WebSocketServer({port: 20001})
         wsServer.on('connection', function connection(socket) {
