@@ -1,4 +1,8 @@
+
+# Client is deprecated but works great
+
 # Data aggregator
+
 
 Master-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?branch=master)](https://travis-ci.org/BPChain/private-xain) [![Coverage Status](https://coveralls.io/repos/github/BPChain/private-xain/badge.svg?branch=master)](https://coveralls.io/github/BPChain/private-xain?branch=master) <br />
 Dev-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?branch=dev)](https://travis-ci.org/BPChain/private-xain) [![Coverage Status](https://coveralls.io/repos/github/BPChain/private-xain/badge.svg?branch=dev)](https://coveralls.io/github/BPChain/private-xain?branch=dev) <br />
