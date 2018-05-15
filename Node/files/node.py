@@ -6,8 +6,8 @@
     seen in gather_data"""
 
 import json
-import time
 import os
+import time
 from functools import reduce
 
 import psutil as psutil
@@ -51,7 +51,6 @@ def retrieve_new_blocks_since(number_of_last_sent_block, web3):
 
 
 def calculate_avg_block_difficulty(blocks_to_send):
-    global AVG_BLOCK_DIFFICULTY
     if not blocks_to_send:
         return AVG_BLOCK_DIFFICULTY
     else:
@@ -60,7 +59,6 @@ def calculate_avg_block_difficulty(blocks_to_send):
 
 
 def calculate_avg_block_time(blocks_to_send, last_sent_block):
-    global AVG_BLOCK_TIME
     # first block might be genesis block with timestamp 0. this has to be catched.
     if last_sent_block is None or not blocks_to_send:
         return AVG_BLOCK_TIME
@@ -97,15 +95,16 @@ def provide_data(last_block_number, old_node_data, web3, hostname):
 
 
 def get_node_data(blocks_to_send, last_sent_block, web3, hostname):
-    avg_block_difficulty = calculate_avg_block_difficulty(blocks_to_send)
-    avg_block_time = calculate_avg_block_time(blocks_to_send, last_sent_block)
+    global AVG_BLOCK_DIFFICULTY, AVG_BLOCK_TIME
+    AVG_BLOCK_DIFFICULTY = calculate_avg_block_difficulty(blocks_to_send)
+    AVG_BLOCK_TIME = calculate_avg_block_time(blocks_to_send, last_sent_block)
     host_id = web3.admin.nodeInfo.id
     hash_rate = web3.eth.hashrate
     last_block_size = web3.eth.getBlock('latest').size
     is_mining = 1 if web3.eth.mining else 0
     node_data = {"chainName": "xain", "hostId": host_id, "hashrate": hash_rate,
                  "blockSize": last_block_size,
-                 "avgDifficulty": avg_block_difficulty, "avgBlocktime": avg_block_time,
+                 "avgDifficulty": AVG_BLOCK_DIFFICULTY, "avgBlocktime": AVG_BLOCK_TIME,
                  "isMining": is_mining, "target": hostname, 'cpuUsage': psutil.cpu_percent()}
     return node_data
 
