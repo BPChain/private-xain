@@ -5,10 +5,10 @@ from attrdict import AttrDict
 
 from Node.files import node
 
-LAST_SENT_BLOCK = AttrDict({'number': 0, 'difficulty': 2.0, 'timestamp': 1})
-BLOCKS = [AttrDict({'number': 1, 'difficulty': 2.0, 'timestamp': 2}),
-          AttrDict({'number': 2, 'difficulty': 3.0, 'timestamp': 3}),
-          AttrDict({'number': 3, 'difficulty': 4.0, 'timestamp': 4})]
+LAST_SENT_BLOCK = AttrDict({'number': 0, 'difficulty': 2.0, 'timestamp': 1, 'size': 1})
+BLOCKS = [AttrDict({'number': 1, 'difficulty': 2.0, 'timestamp': 2, 'size': 1}),
+          AttrDict({'number': 2, 'difficulty': 3.0, 'timestamp': 3, 'size': 1}),
+          AttrDict({'number': 3, 'difficulty': 4.0, 'timestamp': 4, 'size': 1})]
 
 
 def test_avg_difficulty():
@@ -44,7 +44,7 @@ def test_provide_data_for_first_block():
     web3.eth.getBlock = getBlock
     number_of_last_block = 0
     node_data = {"avgDifficulty": 0, "avgBlocktime": 0}
-    last_b_num, node_data = node.provide_data(number_of_last_block, node_data, web3)
+    last_b_num, node_data = node.provide_data(number_of_last_block, node_data, web3, 'host')
     assert last_b_num == 3
     assert node_data['avgDifficulty'] == 0
     assert node_data['avgBlocktime'] == 0
@@ -59,7 +59,7 @@ def test_provide_data():
     web3.eth.getBlock = getBlock
     number_of_last_block = 1
     node_data = {"avgDifficulty": 0, "avgBlocktime": 0}
-    last_b_num, node_data = node.provide_data(number_of_last_block, node_data, web3)
+    last_b_num, node_data = node.provide_data(number_of_last_block, node_data, web3, 'host')
     assert last_b_num == 3
     assert node_data['avgDifficulty'] == 3.5
     assert node_data['avgBlocktime'] == 1
@@ -74,7 +74,7 @@ def test_provide_data_no_new_blocks():
     web3.eth.getBlock = getBlock
     number_of_last_block = BLOCKS[0].number
     node_data = {"avgDifficulty": 3, "avgBlocktime": 4.4}
-    last_b_num, node_data = node.provide_data(number_of_last_block, node_data, web3)
+    last_b_num, node_data = node.provide_data(number_of_last_block, node_data, web3, 'host')
     assert last_b_num == BLOCKS[0].number
     assert node_data['avgDifficulty'] == 3
     assert node_data['avgBlocktime'] == 4.4
@@ -114,8 +114,8 @@ def test_node_data_format():
     web3.eth.getBlock = getBlock
     number_of_last_block = BLOCKS[0].number
     node_data = {"avgDifficulty": 3, "avgBlocktime": 4.4}
-    _, node_data = node.provide_data(number_of_last_block, node_data, web3)
-    demo_data = {"hostId": 1, "hashrate": 1, "gasPrice": 1,
+    _, node_data = node.provide_data(number_of_last_block, node_data, web3, 'host')
+    demo_data = {"hostId": 1, "hashrate": 1, "blockSize": 1, "cpuUsage" : 1,
                  "avgDifficulty": 1, "avgBlocktime": 1,
                  "isMining": 1}
     for key in demo_data:
