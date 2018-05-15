@@ -115,7 +115,7 @@ def test_node_data_format():
     number_of_last_block = BLOCKS[0].number
     node_data = {"avgDifficulty": 3, "avgBlocktime": 4.4}
     _, node_data = node.provide_data(number_of_last_block, node_data, web3, 'host')
-    demo_data = {"hostId": 1, "hashrate": 1, "gasPrice": 1,
+    demo_data = {"hostId": 1, "hashrate": 1, "blockSize": 1, "cpuUsage" : 1,
                  "avgDifficulty": 1, "avgBlocktime": 1,
                  "isMining": 1}
     for key in demo_data:
