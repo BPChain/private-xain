@@ -18,6 +18,7 @@ from websocket import create_connection, WebSocket
 AVG_BLOCK_TIME = 0
 AVG_BLOCK_DIFFICULTY = 0
 
+
 def connect_to_blockchain():
     web3 = Web3(HTTPProvider('http://127.0.0.1:8545',
                              request_kwargs={'timeout': 120}))
@@ -29,10 +30,12 @@ def connect_to_blockchain():
 def start_mining(web3):
     web3.miner.start(1)
 
+
 def unlock_account(web3):
     file = open("coinbasepwd")
     coinbasepwd = file.read()
     web3.personal.unlockAccount(web3.eth.accounts[0], coinbasepwd, 0)
+
 
 def retrieve_new_blocks_since(number_of_last_sent_block, web3):
     """Gets the newly mined blocks since last send cycle"""
@@ -73,7 +76,8 @@ def provide_data_every(n_seconds, web3, hostname):
     while True:
         time.sleep(n_seconds)
         try:
-            number_of_last_block, node_data = provide_data(number_of_last_block, node_data, web3, hostname)
+            number_of_last_block, node_data = provide_data(number_of_last_block, node_data, web3,
+                                                           hostname)
             send_data(node_data)
         # pylint: disable=broad-except
         except Exception as exception:
@@ -99,7 +103,8 @@ def get_node_data(blocks_to_send, last_sent_block, web3, hostname):
     hash_rate = web3.eth.hashrate
     last_block_size = web3.eth.getBlock('latest').size
     is_mining = 1 if web3.eth.mining else 0
-    node_data = {"chainName": "xain", "hostId": host_id, "hashrate": hash_rate, "blockSize": last_block_size,
+    node_data = {"chainName": "xain", "hostId": host_id, "hashrate": hash_rate,
+                 "blockSize": last_block_size,
                  "avgDifficulty": avg_block_difficulty, "avgBlocktime": avg_block_time,
                  "isMining": is_mining, "target": hostname, 'cpuUsage': psutil.cpu_percent()}
     return node_data
@@ -129,9 +134,6 @@ def send_data(node_data):
     except Exception as exception:
         print("Exception occurred during sending: ")
         print(exception)
-
-
-
 
 
 def main():
