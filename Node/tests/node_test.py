@@ -74,7 +74,7 @@ def test_provide_data_no_new_blocks():
     web3.eth.getBlock = getBlock
     number_of_last_block = BLOCKS[0].number
     node_data = {"avgDifficulty": 3, "avgBlocktime": 4.4}
-    last_b_num, node_data = node.provide_data(number_of_last_block, node_data, web3)
+    last_b_num, node_data = node.provide_data(number_of_last_block, node_data, web3, 'host')
     assert last_b_num == BLOCKS[0].number
     assert node_data['avgDifficulty'] == 3
     assert node_data['avgBlocktime'] == 4.4
@@ -114,7 +114,7 @@ def test_node_data_format():
     web3.eth.getBlock = getBlock
     number_of_last_block = BLOCKS[0].number
     node_data = {"avgDifficulty": 3, "avgBlocktime": 4.4}
-    _, node_data = node.provide_data(number_of_last_block, node_data, web3)
+    _, node_data = node.provide_data(number_of_last_block, node_data, web3, 'host')
     demo_data = {"hostId": 1, "hashrate": 1, "gasPrice": 1,
                  "avgDifficulty": 1, "avgBlocktime": 1,
                  "isMining": 1}
