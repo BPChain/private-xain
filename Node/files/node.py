@@ -10,6 +10,7 @@ import time
 import os
 from functools import reduce
 
+import psutil as psutil
 import yaml
 from web3 import Web3, HTTPProvider
 from websocket import create_connection, WebSocket
@@ -101,7 +102,7 @@ def get_node_data(blocks_to_send, last_sent_block, web3, hostname):
     is_mining = 1 if web3.eth.mining else 0
     node_data = {"chainName": "xain", "hostId": host_id, "hashrate": hash_rate, "blockSize": last_block_size,
                  "avgDifficulty": avg_block_difficulty, "avgBlocktime": avg_block_time,
-                 "isMining": is_mining, "target": hostname}
+                 "isMining": is_mining, "target": hostname, 'cpuUsage': psutil.cpu_percent()}
     return node_data
 
 
