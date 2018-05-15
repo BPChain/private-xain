@@ -8,13 +8,13 @@ var abi = JSON.parse('[{"constant":true,"inputs":[{"name":"","type":"uint256"}],
 var provider = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 web3Admin.extend(provider)
 
-function start() {
+function waitForContractAddress() {
   var ws
     ws = new WebSocket('ws://xain_contract_deployer:40000')
      ws.on('message', function incoming(address) {
          console.log("-------------------------Address-------------")
          console.log(address)
-         startSimulate(address)
+         startSimulation(address)
 
      })
   ws.onerror=function(event) {
@@ -24,13 +24,13 @@ function start() {
 
   ws.onclose=function(event){
       setTimeout(function () {
-          start()
+          waitForContractAddress()
         }, 10000)
   }
 
 }
 
-function startSimulate(address) {
+function startSimulation(address) {
     if ((provider.eth.getBalance(provider.eth.accounts[0]).toString(10)) > requiredBalance) {
         generateCoins(address)
         setTimeout(function () {
@@ -39,7 +39,7 @@ function startSimulate(address) {
     }
     else {
         setTimeout(function () {
-            startSimulate(address)
+            startSimulation(address)
         }, 10000)
     }
 }
@@ -69,5 +69,5 @@ function generateCoins(address) {
 
 
 }
-start()
+waitForContractAddress()
 

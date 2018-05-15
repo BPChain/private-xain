@@ -27,7 +27,7 @@ module.exports = function (address) {
                 try {
                     console.log(error)
                 }
-                catch(error) {
+                catch (error) {
 
                 }
                 console.log('connected')
