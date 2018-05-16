@@ -6,16 +6,18 @@
     seen in gather_data"""
 
 import json
-import time
 import os
+import time
 from functools import reduce
 
+import psutil as psutil
 import yaml
 from web3 import Web3, HTTPProvider
 from websocket import create_connection, WebSocket
 
-avg_block_time = 0
-avg_block_difficulty = 0
+AVG_BLOCK_TIME = 0
+AVG_BLOCK_DIFFICULTY = 0
+
 
 def connect_to_blockchain():
     web3 = Web3(HTTPProvider('http://127.0.0.1:8545',
@@ -28,10 +30,12 @@ def connect_to_blockchain():
 def start_mining(web3):
     web3.miner.start(1)
 
+
 def unlock_account(web3):
     file = open("coinbasepwd")
     coinbasepwd = file.read()
     web3.personal.unlockAccount(web3.eth.accounts[0], coinbasepwd, 0)
+
 
 def retrieve_new_blocks_since(number_of_last_sent_block, web3):
     """Gets the newly mined blocks since last send cycle"""
@@ -47,19 +51,17 @@ def retrieve_new_blocks_since(number_of_last_sent_block, web3):
 
 
 def calculate_avg_block_difficulty(blocks_to_send):
-    global avg_block_difficulty
     if not blocks_to_send:
-        return avg_block_difficulty
+        return AVG_BLOCK_DIFFICULTY
     else:
         return reduce((lambda accum, block: accum + block.difficulty), blocks_to_send, 0) / len(
             blocks_to_send)
 
 
 def calculate_avg_block_time(blocks_to_send, last_sent_block):
-    global avg_block_time
     # first block might be genesis block with timestamp 0. this has to be catched.
     if last_sent_block is None or not blocks_to_send:
-        return avg_block_time
+        return AVG_BLOCK_TIME
     blocks_to_send = [last_sent_block] + blocks_to_send
     deltas = [next.timestamp - current.timestamp for current, next in zip(blocks_to_send,
                                                                           blocks_to_send[1:])]
@@ -72,7 +74,8 @@ def provide_data_every(n_seconds, web3, hostname):
     while True:
         time.sleep(n_seconds)
         try:
-            number_of_last_block, node_data = provide_data(number_of_last_block, node_data, web3, hostname)
+            number_of_last_block, node_data = provide_data(number_of_last_block, node_data, web3,
+                                                           hostname)
             send_data(node_data)
         # pylint: disable=broad-except
         except Exception as exception:
@@ -92,16 +95,17 @@ def provide_data(last_block_number, old_node_data, web3, hostname):
 
 
 def get_node_data(blocks_to_send, last_sent_block, web3, hostname):
-    avg_block_difficulty = calculate_avg_block_difficulty(blocks_to_send)
-    avg_block_time = calculate_avg_block_time(blocks_to_send, last_sent_block)
+    global AVG_BLOCK_DIFFICULTY, AVG_BLOCK_TIME
+    AVG_BLOCK_DIFFICULTY = calculate_avg_block_difficulty(blocks_to_send)
+    AVG_BLOCK_TIME = calculate_avg_block_time(blocks_to_send, last_sent_block)
     host_id = web3.admin.nodeInfo.id
     hash_rate = web3.eth.hashrate
-    gas_price = web3.eth.gasPrice
     last_block_size = web3.eth.getBlock('latest').size
     is_mining = 1 if web3.eth.mining else 0
-    node_data = {"chainName": "xain", "hostId": host_id, "hashrate": hash_rate, "blockSize": last_block_size,
-                 "avgDifficulty": avg_block_difficulty, "avgBlocktime": avg_block_time,
-                 "isMining": is_mining, "target": hostname}
+    node_data = {"chainName": "xain", "hostId": host_id, "hashrate": hash_rate,
+                 "blockSize": last_block_size,
+                 "avgDifficulty": AVG_BLOCK_DIFFICULTY, "avgBlocktime": AVG_BLOCK_TIME,
+                 "isMining": is_mining, "target": hostname, 'cpuUsage': psutil.cpu_percent()}
     return node_data
 
 
@@ -129,9 +133,6 @@ def send_data(node_data):
     except Exception as exception:
         print("Exception occurred during sending: ")
         print(exception)
-
-
-
 
 
 def main():

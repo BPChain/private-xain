@@ -6,12 +6,14 @@ notifications:
   email: false
 # command to install dependencies
 install:
+  - pip install git+https://github.com/BPChain/scenario-orchestration-service.git
   - pip install -r requirements.txt
   - pip install pylint
   - pip install coveralls
 # command to test
 script:
   - pylint Node/files
+  - pylint Node/files/METAScenario/scripts/python_sources/
   - pylint Node/tests
   - pytest
   - coverage run -m pytest
