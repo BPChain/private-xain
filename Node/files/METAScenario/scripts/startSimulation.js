@@ -31,13 +31,19 @@ function waitForContractAddress() {
 }
 
 function startSimulation(address) {
-    if ((provider.eth.getBalance(provider.eth.accounts[0]).toString(10)) > requiredBalance) {
-        generateCoins(address)
-        setTimeout(function () {
-            require("./simulateTransactions")(address)
-        }, 10000)
-    }
-    else {
+    try {
+        if ((provider.eth.getBalance(provider.eth.accounts[0]).toString(10)) > requiredBalance) {
+            generateCoins(address)
+            setTimeout(function () {
+                require("./simulateTransactions")(address)
+            }, 10000)
+        }
+        else {
+            setTimeout(function () {
+                startSimulation(address)
+            }, 10000)
+        }
+    } catch (error) {
         setTimeout(function () {
             startSimulation(address)
         }, 10000)
