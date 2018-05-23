@@ -8,6 +8,7 @@
 import json
 import os
 import time
+import sys
 from functools import reduce
 
 import psutil as psutil
@@ -18,6 +19,7 @@ from websocket import create_connection, WebSocket
 AVG_BLOCK_TIME = 0
 AVG_BLOCK_DIFFICULTY = 0
 
+MINER = sys.argv[1]
 
 def connect_to_blockchain():
     web3 = Web3(HTTPProvider('http://127.0.0.1:8545',
@@ -95,13 +97,17 @@ def provide_data(last_block_number, old_node_data, web3, hostname):
 
 
 def get_node_data(blocks_to_send, last_sent_block, web3, hostname):
+    global MINER
     global AVG_BLOCK_DIFFICULTY, AVG_BLOCK_TIME
     AVG_BLOCK_DIFFICULTY = calculate_avg_block_difficulty(blocks_to_send)
     AVG_BLOCK_TIME = calculate_avg_block_time(blocks_to_send, last_sent_block)
     host_id = web3.admin.nodeInfo.id
     hash_rate = web3.eth.hashrate
     last_block_size = web3.eth.getBlock('latest').size
-    is_mining = 1 if web3.eth.mining else 0
+    if MINER == '1':
+        is_mining = 1 if web3.eth.mining else 0
+    else:
+        is_mining = 0
     node_data = {"chainName": "xain", "hostId": host_id, "hashrate": hash_rate,
                  "blockSize": last_block_size,
                  "avgDifficulty": AVG_BLOCK_DIFFICULTY, "avgBlocktime": AVG_BLOCK_TIME,
