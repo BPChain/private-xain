@@ -22,6 +22,7 @@ AVG_TRANSACTIONS_PER_BLOCK = 0
 
 MINER = sys.argv[1]
 
+
 def connect_to_blockchain():
     web3 = Web3(HTTPProvider('http://127.0.0.1:8545',
                              request_kwargs={'timeout': 120}))
@@ -62,8 +63,8 @@ def calculate_avg_block_difficulty(blocks_to_send):
 
 
 def calculate_avg_block_time(blocks_to_send, last_sent_block):
-    # if last_sent_block is None or not blocks_to_send:first block might be genesis block with timestamp 0. this has to be catched.
-
+    if last_sent_block is None or not blocks_to_send:
+    # first block might be genesis block with timestamp 0. this has to be catched.
         return AVG_BLOCK_TIME
     blocks_to_send = [last_sent_block] + blocks_to_send
     deltas = [next.timestamp - current.timestamp for current, next in zip(blocks_to_send,
@@ -79,7 +80,7 @@ def calculate_avg_transactions_per_block(blocks_to_send, last_sent_block):
         blocks_to_send = [last_sent_block] + blocks_to_send
         return reduce((lambda accum, block: accum
                        + len(block.transactions)), blocks_to_send, 0) / len(
-            blocks_to_send)
+                           blocks_to_send)
 
 
 def provide_data_every(n_seconds, web3, hostname):
