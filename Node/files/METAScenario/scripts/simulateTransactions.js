@@ -47,7 +47,7 @@ module.exports = function (address) {
 
     function startws(_METAScenario, coinbasepwd) {
         console.log('!!!!! Started Websocket')
-        let wsServer= new WebSocketServer({port: 20001})
+        let wsServer = new WebSocketServer({port: 20001})
         wsServer.on('connection', function connection(socket) {
             socket.on('message', function incoming(data) {
                 try {
@@ -58,7 +58,7 @@ module.exports = function (address) {
                     let output = _METAScenario.transfer('0x007ccffb7916f37f7aeef05e8096ecfbe55afc2f', 1, data)
                     provider.miner.start()
                     console.log(output)
-                } catch(error) {
+                } catch (error) {
                     console.log("!!!!!!!!!!!!!!!!!Transaction failed!!!!!!!!!")
                     console.log(error)
                 }
