@@ -62,8 +62,8 @@ def calculate_avg_block_difficulty(blocks_to_send):
 
 
 def calculate_avg_block_time(blocks_to_send, last_sent_block):
-    # first block might be genesis block with timestamp 0. this has to be catched.
-    if last_sent_block is None or not blocks_to_send:
+    # if last_sent_block is None or not blocks_to_send:first block might be genesis block with timestamp 0. this has to be catched.
+
         return AVG_BLOCK_TIME
     blocks_to_send = [last_sent_block] + blocks_to_send
     deltas = [next.timestamp - current.timestamp for current, next in zip(blocks_to_send,
@@ -71,11 +71,12 @@ def calculate_avg_block_time(blocks_to_send, last_sent_block):
     return sum(deltas) / len(deltas)
 
 
-def calculate_avg_transactions_per_block(blocks_to_send):
+def calculate_avg_transactions_per_block(blocks_to_send, last_sent_block):
     global AVG_TRANSACTIONS_PER_BLOCK
-    if not blocks_to_send:
+    if last_sent_block is None or not blocks_to_send:
         return AVG_TRANSACTIONS_PER_BLOCK
     else:
+        blocks_to_send = [last_sent_block] + blocks_to_send
         return reduce((lambda accum, block: accum
                        + len(block.transactions)), blocks_to_send, 0) / len(
             blocks_to_send)
@@ -116,7 +117,7 @@ def get_node_data(blocks_to_send, last_sent_block, web3, hostname):
     AVG_BLOCK_DIFFICULTY = calculate_avg_block_difficulty(blocks_to_send)
     AVG_BLOCK_TIME = calculate_avg_block_time(blocks_to_send, last_sent_block)
     AVG_TRANSACTIONS_PER_BLOCK = calculate_avg_transactions_per_block(
-        blocks_to_send)
+        blocks_to_send, last_sent_block)
     host_id = web3.admin.nodeInfo.id
     hash_rate = web3.eth.hashrate
     last_block_size = web3.eth.getBlock('latest').size
