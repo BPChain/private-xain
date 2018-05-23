@@ -17,6 +17,7 @@ from websocket import create_connection, WebSocket
 
 AVG_BLOCK_TIME = 0
 AVG_BLOCK_DIFFICULTY = 0
+AVG_TRANSACTIONS_PER_BLOCK = 0
 
 
 def connect_to_blockchain():
@@ -67,6 +68,15 @@ def calculate_avg_block_time(blocks_to_send, last_sent_block):
                                                                           blocks_to_send[1:])]
     return sum(deltas) / len(deltas)
 
+def calculate_avg_transactions_per_block(blocks_to_send):
+    global AVG_TRANSACTIONS_PER_BLOCK
+    if not blocks_to_send:
+        return AVG_TRANSACTIONS_PER_BLOCK
+    else:
+        return reduce((lambda accum, block: accum
+        + len(block.transactions)), blocks_to_send, 0) / len(
+            blocks_to_send)
+
 
 def provide_data_every(n_seconds, web3, hostname):
     number_of_last_block = 0
@@ -89,15 +99,17 @@ def provide_data(last_block_number, old_node_data, web3, hostname):
     if new_last_block_number == last_block_number or last_block_number == 0:
         node_data["avgDifficulty"] = old_node_data["avgDifficulty"]
         node_data["avgBlocktime"] = old_node_data["avgBlocktime"]
+        node_data["avgTransactions"] = old_node_data["avgTransactions"]
     print(node_data)
     last_block_number = new_last_block_number
     return last_block_number, node_data
 
 
 def get_node_data(blocks_to_send, last_sent_block, web3, hostname):
-    global AVG_BLOCK_DIFFICULTY, AVG_BLOCK_TIME
+    global AVG_BLOCK_DIFFICULTY, AVG_BLOCK_TIME, AVG_TRANSACTIONS_PER_BLOCK
     AVG_BLOCK_DIFFICULTY = calculate_avg_block_difficulty(blocks_to_send)
     AVG_BLOCK_TIME = calculate_avg_block_time(blocks_to_send, last_sent_block)
+    AVG_TRANSACTIONS_PER_BLOCK = calculate_avg_transactions_per_block(blocks_to_send)
     host_id = web3.admin.nodeInfo.id
     hash_rate = web3.eth.hashrate
     last_block_size = web3.eth.getBlock('latest').size
@@ -105,6 +117,7 @@ def get_node_data(blocks_to_send, last_sent_block, web3, hostname):
     node_data = {"chainName": "xain", "hostId": host_id, "hashrate": hash_rate,
                  "blockSize": last_block_size,
                  "avgDifficulty": AVG_BLOCK_DIFFICULTY, "avgBlocktime": AVG_BLOCK_TIME,
+                 "avgTransasctions": AVG_TRANSACTIONS_PER_BLOCK,
                  "isMining": is_mining, "target": hostname, 'cpuUsage': psutil.cpu_percent()}
     return node_data
 
