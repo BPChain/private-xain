@@ -17,6 +17,6 @@ script:
   - pylint tests
   - pytest
   - coverage run -m pytest
-  - coverage report -m --include="Node/*"
+  - coverage report -m --include="files/*"
 after_success:
   - coveralls
