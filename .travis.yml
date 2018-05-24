@@ -12,9 +12,9 @@ install:
   - pip install coveralls
 # command to test
 script:
-  - pylint Node/files
-  - pylint Node/files/METAScenario/scripts/python_sources/
-  - pylint Node/tests
+  - pylint files
+  - pylint files/METAScenario/scripts/python_sources/
+  - pylint tests
   - pytest
   - coverage run -m pytest
   - coverage report -m --include="Node/*"

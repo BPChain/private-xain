@@ -20,7 +20,7 @@ AVG_BLOCK_TIME = 0
 AVG_BLOCK_DIFFICULTY = 0
 AVG_TRANSACTIONS_PER_BLOCK = 0
 
-MINER = sys.argv[1]
+MINER = sys.argv[1] if len(sys.argv) > 1 else '1'
 
 
 def connect_to_blockchain():
@@ -78,9 +78,7 @@ def calculate_avg_transactions_per_block(blocks_to_send, last_sent_block):
         return AVG_TRANSACTIONS_PER_BLOCK
     else:
         blocks_to_send = [last_sent_block] + blocks_to_send
-        return reduce((lambda accum, block: accum
-                                            + len(block.transactions)), blocks_to_send, 0) / len(
-            blocks_to_send)
+        return reduce((lambda accum, block: accum + len(block.transactions)), blocks_to_send, 0) / len(blocks_to_send)
 
 
 def provide_data_every(n_seconds, web3, hostname):
@@ -114,11 +112,10 @@ def provide_data(last_block_number, old_node_data, web3, hostname):
 
 def cpu_usage():
     return sum([p.cpu_percent() for p in psutil.process_iter()
-                if 'geth' in p.info['name']]) / psutil.cpu_count()
+                if 'geth' in p.name()]) / psutil.cpu_count()
 
 
 def get_node_data(blocks_to_send, last_sent_block, web3, hostname):
-    global MINER
     global AVG_BLOCK_DIFFICULTY, AVG_BLOCK_TIME, AVG_TRANSACTIONS_PER_BLOCK
     AVG_BLOCK_DIFFICULTY = calculate_avg_block_difficulty(blocks_to_send)
     AVG_BLOCK_TIME = calculate_avg_block_time(blocks_to_send, last_sent_block)
