@@ -35,7 +35,7 @@ function startSimulation(address) {
         if ((provider.eth.getBalance(provider.eth.accounts[0]).toString(10)) > requiredBalance) {
             generateCoins(address)
             setTimeout(function () {
-                require("./simulateTransactions")(address)
+                require("./runTransactionSlave")(address)
             }, 10000)
         }
         else {
