@@ -5,6 +5,7 @@ const ip = require('ip')
 const web3Admin = require('web3admin')
 const fs = require('fs')
 const abi = require('../contractAbi.json')
+const sleepSeconds = require('sleepjs').sleepSeconds
 
 
 module.exports = function (address) {
@@ -36,10 +37,11 @@ module.exports = function (address) {
       startws(METAScenario, coinbasepwd)
     }
     catch (error) {
-      setTimeout(() => {
-        console.log('Default account could not be set. Retrying')
-        initialize()
-      }, 20000)
+      sleepSeconds(20)
+        .then(() => {
+          console.log('Default account could not be set. Retrying')
+          initialize()
+        })
     }
   }
 
@@ -66,10 +68,11 @@ module.exports = function (address) {
       })
       socket.onerror = function (error) {
         console.error(error)
-        setTimeout(() => {
-          socket.close()
-          startws()
-        }, 10000)
+        sleepSeconds(20)
+          .then(() => {
+            socket.close()
+            startws()
+          })
       }
     })
   }

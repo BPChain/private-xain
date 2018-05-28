@@ -4,6 +4,8 @@ const web3Admin = require('web3admin')
 const fs = require('fs')
 const requiredBalance = 9999999999
 const abi = require('../contractAbi.json')
+const sleepSeconds = require('sleepjs').sleepSeconds
+const sleepMinutes = require('sleepjs').sleepMinutes
 const provider = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'))
 web3Admin.extend(provider)
 
@@ -21,9 +23,8 @@ function waitForContractAddress () {
   }
 
   ws.onclose = function () {
-    setTimeout(() => {
-      waitForContractAddress()
-    }, 10000)
+    sleepSeconds(10)
+      .then(waitForContractAddress)
   }
 
 }
@@ -33,20 +34,16 @@ function startSimulation (address) {
     if (provider.eth.getBalance(provider.eth.accounts[0])
       .toString(10) > requiredBalance) {
       generateCoins(address)
-      setTimeout(() => {
-        require('./runTransactionSlave')(address)
-      }, 10000)
+      require('./runTransactionSlave')(address)
     }
     else {
-      setTimeout(() => {
-        startSimulation(address)
-      }, 10000)
+      sleepSeconds(10)
+        .then(() => startSimulation(address))
     }
   }
   catch (error) {
-    setTimeout(() => {
-      startSimulation(address)
-    }, 10000)
+    sleepSeconds(10)
+      .then(() => startSimulation(address))
   }
 }
 
@@ -54,8 +51,9 @@ function startSimulation (address) {
 function generateCoins (address) {
   try {
     const account = provider.eth.accounts[0]
-    let coinbasepwd = fs.readFileSync('/root/files/coinbasepwd', 'utf8')
-    coinbasepwd = coinbasepwd.replace('\n', '')
+    const coinbasepwd = fs
+      .readFileSync('/root/files/coinbasepwd', 'utf8')
+      .replace('\n', '')
     const METAScenario = provider.eth.contract(abi)
       .at(address)
     provider.eth.defaultAccount = account
@@ -63,17 +61,15 @@ function generateCoins (address) {
     provider.personal.unlockAccount(account, coinbasepwd)
     METAScenario.generate(requiredBalance)
     provider.miner.start()
-    setTimeout(() => {
-      generateCoins(address)
-    }, 1000000)
+    sleepMinutes(10)
+      .then(() => generateCoins(address))
   }
   catch (error) {
     provider.miner.start()
     console.log('An error occured during generating coins')
     console.log(error)
-    setTimeout(() => {
-      generateCoins(address)
-    }, 30000)
+    sleepSeconds(30)
+      .then(() => generateCoins(address))
   }
 
 
