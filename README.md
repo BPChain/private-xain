@@ -4,8 +4,8 @@
 # Data aggregator
 
 
-Master-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?branch=master)](https://travis-ci.org/BPChain/private-xain) [![Coverage Status](https://coveralls.io/repos/github/BPChain/private-xain/badge.svg?branch=master)](https://coveralls.io/github/BPChain/private-xain?branch=master) <br />
-Dev-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?branch=dev)](https://travis-ci.org/BPChain/private-xain) [![Coverage Status](https://coveralls.io/repos/github/BPChain/private-xain/badge.svg?branch=dev)](https://coveralls.io/github/BPChain/private-xain?branch=dev) <br />
+Master-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?branch=master)](https://travis-ci.org/BPChain/private-xain) <br />
+Dev-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?branch=dev)](https://travis-ci.org/BPChain/private-xain)  <br />
 
 
 This is the blockchain backend, which interconnects several hosts to participate in a blockchain. Each host sends its statistics eg. hashrate to a server which is not implemented here.
