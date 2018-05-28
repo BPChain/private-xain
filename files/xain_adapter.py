@@ -19,6 +19,17 @@ class XainAdapter(BlockchainAdapter):
         self.web3_rpc.miner.start(1)
         self.previous_block_number = 0
 
+    def fetch_newest_block_number(self) -> int:
+        return self.web3_rpc.eth.getBlock('latest').number
+
+    def fetch_block_with(self, number: int):
+        return self.web3_rpc.eth.getBlock(number)
+
+    def make_block_from(self, raw_block) -> Block:
+        #  TODO: Check the matter of the genesis block with potential timestamp 0
+        return Block(raw_block.difficulty, raw_block.transactions,
+                     raw_block.timestamp, raw_block.size)
+
     def hashrate(self) -> int:
         return self.web3_rpc.eth.hashrate
 
@@ -30,17 +41,3 @@ class XainAdapter(BlockchainAdapter):
     def host_id(self):
         return self.web3_rpc.admin.nodeInfo.id
 
-    def new_blocks_and_previous(self) -> Tuple[List[Block], Block]:
-        newest_block_number = self.web3_rpc.eth.getBlock('latest').number
-        raw_blocks = [self.web3_rpc.eth.getBlock(number)
-                      for number in range(self.previous_block_number, newest_block_number + 1)]
-
-        def make_block_from(raw_block):
-            #  TODO: Check the matter of the genesis block with potential timestamp 0
-            return Block(raw_block.difficulty, raw_block.transactions,
-                         raw_block.timestamp, raw_block.size)
-
-        blocks = [make_block_from(raw_block) for raw_block in raw_blocks]
-        old_block = blocks[0]
-        new_blocks = blocks[1:] if len(blocks) > 1 else []
-        return new_blocks, old_block
