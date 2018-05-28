@@ -6,10 +6,10 @@ const WebSocketServer = ws.Server
 const web3Admin = require('web3admin')
 const requiredBalance = 9999999999
 var web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
-setTimeout(function () {
-            web3Admin.extend(web3)
-        }, 1000)
-function start() {
+web3Admin.extend(web3)
+
+
+function deployContract() {
     try {
         var account = web3.eth.accounts[0];
         if(web3.eth.getBalance(account).toString(10) > requiredBalance) {
@@ -78,5 +78,5 @@ function startWebSocket(contractAddress) {
 
 }
 
-start()
+deployContract()
 
