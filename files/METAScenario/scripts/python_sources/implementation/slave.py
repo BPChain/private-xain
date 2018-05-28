@@ -30,8 +30,8 @@ class Slave(AbstractSlave):
 
     def is_alive(self):
         try:
-            conntection = create_connection(self.web_socket_address)
-            conntection.close()
+            connection = create_connection(self.web_socket_address)
+            connection.close()
             return True
         except Exception as error:
             LOG.error(error)
