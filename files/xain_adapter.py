@@ -11,7 +11,7 @@ class XainAdapter(BlockchainAdapter):
     def __init__(self, is_miner):
         super().__init__(is_miner)
         self.web3_rpc = Web3(HTTPProvider('http://127.0.0.1:8545', request_kwargs={'timeout': 120}))
-        file = open("coinbasepwd")
+        file = open("/root/files/coinbasepwd")
         coinbasepwd = file.read()
         self.web3_rpc.personal.unlockAccount(self.web3_rpc.eth.accounts[0], coinbasepwd, 0)
         while not self.web3_rpc.isConnected():

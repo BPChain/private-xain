@@ -2,7 +2,7 @@
 echo "141.89.225.55 bpt-lab.org" >> /etc/hosts
 mkdir /root/data
 mkdir /root/data/keystore
-cp /root/keys/coinbasepwd_$XAIN_NUMBER /root/data
+cp /root/keys/coinbasepwd_$XAIN_NUMBER /root/data/
 mv /root/data/coinbasepwd_$XAIN_NUMBER /root/data/coinbasepwd
 cp /root/data/coinbasepwd /root/files
 cp /root/keys/XAIN_key_$XAIN_NUMBER /root/data/keystore
