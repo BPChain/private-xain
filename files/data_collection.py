@@ -13,7 +13,7 @@ def main():
     is_miner = sys.argv[1] if len(sys.argv) > 1 else '1'
     print(is_miner)
     uri = yaml.safe_load(open("/root/files/config.yml"))
-    server_address = uri['networking']['socketProtocol'] + uri['networking']['socketAdress']
+    server_address = uri['serverAddress']
     blockchain_reader = BlockchainReader('geth', 'xain', XainAdapter(is_miner))
     Sender(server_address, 15, blockchain_reader)
 

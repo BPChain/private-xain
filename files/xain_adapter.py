@@ -8,7 +8,6 @@ from statistics_reader.blockchain_adapter import BlockchainAdapter
 from web3 import Web3, HTTPProvider
 
 
-
 class XainAdapter(BlockchainAdapter):
     """I am an adapter for the Xain blockchain api"""
 

@@ -1,4 +1,1 @@
-networking:
-  socketProtocol: "wss://"
-  socketPort: ""
-  socketAdress: "bpt-lab.org/bp2017w1-backendlistener"
+serverAddress: "https://bpt-lab.org/bp2017w1-bpchain/chain/private/xain"
