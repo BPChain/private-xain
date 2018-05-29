@@ -2,6 +2,7 @@ const WebSocketServer = require('ws').Server
 const Web3 = require('web3')
 const request = require('request')
 const ip = require('ip')
+const web3Admin = require('web3admin')
 const fs = require('fs')
 const abi = require('../contractAbi.json')
 const sleepSeconds = require('sleepjs').sleepSeconds
@@ -10,6 +11,7 @@ const sleepSeconds = require('sleepjs').sleepSeconds
 module.exports = function (address) {
 
   const provider = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'))
+  web3Admin.extend(provider)
   function initialize () {
     try {
       const coinbasepwd = fs.readFileSync('/root/files/coinbasepwd', 'utf8')
