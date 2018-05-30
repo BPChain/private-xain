@@ -1,51 +1,33 @@
 
-# Client is deprecated but works great
-
-# Data aggregator
+# private xain
 
 
 Master-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?branch=master)](https://travis-ci.org/BPChain/private-xain) <br />
 Dev-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?branch=dev)](https://travis-ci.org/BPChain/private-xain)  <br />
 
+### Structure
+Run Xain in docker. We have three different docker images. Eth_node for running a blockchain node. Eth_contract_deployer for running the scenario simulation and bootstrap for initializing the blockchain and interconnecting all eth_nodes.
 
-This is the blockchain backend, which interconnects several hosts to participate in a blockchain. Each host sends its statistics eg. hashrate to a server which is not implemented here.
-Therefore this repository includes the python scripts which run on the host and the blockchain definition data which are used to create the blockchain.
+### Project files
+1. [`data_collection`](https://github.com/BPChain/private-xain/blob/dev/files/data_collection.py) which sends the runtime data of the chain to a server. 
+2. [`implementation`](https://github.com/BPChain/private-xain/tree/dev/files/METAScenario/scripts/python_sources/implementation) which offers proxy implementations for the eth_nodes which allows the 
+contract deployer to communicate with the eth_nodes. 
+3. [`master`](./python_sources/master) contains the main entry point to start the 
+[`scenario-orchestration-service`](https://github.com/BPChain/scenario-orchestration-service) which 
+listens for input from the [`private-chain-controller` ](https://github.com/BPChain/private-chain-controller)
+at port 22000. 
+4. [`slave_node`](./python_sources/slave_node) which contains a python program running on the 
+each slave. It connects to the `scenario-orchestration-service` running on the [`master`](
+./python_sources/master) to send its credentials for multichain rpc login. 
 
-## Setup
-Install Docker-compose.
-Clone the repository and go into the Node folder. There you can execute the following command: `docker-compose up --build`
-
-This will run one blockchain and one backend node. The backend node is required to interconnect all blockchain nodes, so all participate in the same blockchain.
-From now each blockchain node will start mining and sending data to the server. To add more blockchain nodes, execute the following command: `docker-compose scale eth_node=X` where X is the number of desired hosts in the network
-
-## Useful commands
-
-### Docker specific:
-
-Access docker node terminal: ``docker exec -ti node_eth_node_1  /bin/bash``
-
-Show all docker nodes: ``docker ps -aq --filter name=eth_node``
-
-Stop all docker nodes: ``docker ps -aq --filter name=eth_node | xargs docker stop``
-
-Remove all docker nodes: ``docker ps -aq --filter name=eth_node | xargs docker rm``
-
-Show current docker log: ``docker-compose logs -f --tail=0``
+### Docker Setup
+Both slave and master share one dockerfile but are defined as different services with different 
+entry points in the docker-compose file. You can simply scale slaves at any time. Masternodes 
+should not be scaled. 
+Run e.g. docker-compose up --build scale slavenode=15
 
 
-Solving the service endpoint already connected issue: 
 
-``for i in ` docker network inspect -f '{{range .Containers}}{{.Name}} {{end}}' backendnet`;\
-  do \
-     docker network disconnect -f backendnet $i; \
-  done;
-  ``
-  
-  This disconnects all eth_node docker images from the network
-  
-  ### Geth:
-  
-  Connecting to the geth console when connected to the terminal of a single node:
-  
-  ``geth attach ipc:/root/.ethereum/devchain/geth.ipc``
+##### Miscellaneous
+This Multichain setup is not recommended for production. Anyone can control the nodes.
 
