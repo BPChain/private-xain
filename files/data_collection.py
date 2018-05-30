@@ -15,7 +15,7 @@ def main():
     uri = yaml.safe_load(open("/root/files/config.yml"))
     server_address = uri['serverAddress']
     blockchain_reader = BlockchainReader('geth', 'xain', XainAdapter(is_miner))
-    Sender(server_address, 15, blockchain_reader)
+    Sender(server_address, 9, blockchain_reader)
 
 
 if __name__ == '__main__':
