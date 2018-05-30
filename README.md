@@ -8,8 +8,9 @@ Dev-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?bran
 ### Structure
 Run Xain in docker. We have three different docker images. Eth_node for running a blockchain node. Eth_contract_deployer for running the scenario simulation and bootstrap for initializing the blockchain and interconnecting all eth_nodes.
 
-### Project files
+### Xain_node files
 1. [`data_collection`](https://github.com/BPChain/private-xain/blob/dev/files/data_collection.py) which sends the runtime data of the chain to a server. 
+2. 
 2. [`implementation`](https://github.com/BPChain/private-xain/tree/dev/files/METAScenario/scripts/python_sources/implementation) which offers proxy implementations for the eth_nodes which allows the 
 contract deployer to communicate with the eth_nodes. 
 3. [`master`](./python_sources/master) contains the main entry point to start the 
@@ -19,6 +20,10 @@ at port 22000.
 4. [`slave_node`](./python_sources/slave_node) which contains a python program running on the 
 each slave. It connects to the `scenario-orchestration-service` running on the [`master`](
 ./python_sources/master) to send its credentials for multichain rpc login. 
+
+### contract_deployer_node files
+
+### bootstrap files
 
 ### Docker Setup
 Both slave and master share one dockerfile but are defined as different services with different 
