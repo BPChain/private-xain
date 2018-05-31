@@ -6,7 +6,7 @@ Master-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?b
 Dev-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?branch=dev)](https://travis-ci.org/BPChain/private-xain)  <br />
 
 ### Structure
-Run Xain in docker. We have three different docker images. Eth_node for running a blockchain node. Eth_contract_deployer for running the scenario simulation and bootstrap for initializing the blockchain and interconnecting all eth_nodes.
+Run Xain in docker. We have three different docker images. xain_node for running a blockchain node. xain_contract_deployer for running the scenario simulation and xain_bootstrap for initializing the blockchain and interconnecting all xain_nodes.
 
 ### xain_node files
 1. ['blockchain_accounts'](https://github.com/BPChain/private-xain/tree/master/keys) are required for each blockchain node to start mining and participate in smart contracts. The XAIN implementation requires specific accounts which cannot be created by geth automatically. Therefore these accounts are fixed for each blockchain node.
