@@ -9,11 +9,11 @@ Dev-Branch: [![Build Status](https://travis-ci.org/BPChain/private-xain.svg?bran
 Run Xain in docker. We have three different docker images. Eth_node for running a blockchain node. Eth_contract_deployer for running the scenario simulation and bootstrap for initializing the blockchain and interconnecting all eth_nodes.
 
 ### Xain_node files
+1. ['blockchain_accounts'](https://github.com/BPChain/private-xain/tree/master/keys) are required for each blockchain node to start mining and participate in smart contracts. The XAIN implementation requires specific accounts which cannot be created by geth automatically. Therefore these accounts are fixed for each blockchain node.
 1. [`data_collection`](https://github.com/BPChain/private-xain/blob/dev/files/data_collection.py) which sends the runtime data of the chain to a server. 
 2. [`scenario_slave`](https://github.com/BPChain/private-xain/blob/master/files/METAScenario/scripts/python_sources/implementation/slave.py)
 which runs a websocket receiving transaction commands from the [`contract_deployer`](https://github.com/BPChain/private-xain/blob/master/files/METAScenario/scripts/python_sources/master_node/run_scenario_service.py)
 3. [`scenario_execution_scripts`](https://github.com/BPChain/private-xain/tree/master/files/METAScenario/scripts) which implement the xain specific execution of a transaction. They are connected with the [`scenario_slave`](https://github.com/BPChain/private-xain/blob/master/files/METAScenario/scripts/python_sources/implementation/slave.py)
-
 
 
 
