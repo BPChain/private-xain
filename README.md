@@ -10,9 +10,13 @@ Run Xain in docker. We have three different docker images. Eth_node for running 
 
 ### Xain_node files
 1. [`data_collection`](https://github.com/BPChain/private-xain/blob/dev/files/data_collection.py) which sends the runtime data of the chain to a server. 
-2. 
-2. [`implementation`](https://github.com/BPChain/private-xain/tree/dev/files/METAScenario/scripts/python_sources/implementation) which offers proxy implementations for the eth_nodes which allows the 
-contract deployer to communicate with the eth_nodes. 
+2. [`scenario_slave`](https://github.com/BPChain/private-xain/blob/master/files/METAScenario/scripts/python_sources/implementation/slave.py)
+which runs a websocket receiving transaction commands from the [`contract_deployer`](https://github.com/BPChain/private-xain/blob/master/files/METAScenario/scripts/python_sources/master_node/run_scenario_service.py)
+3. [`scenario_execution_scripts`](https://github.com/BPChain/private-xain/tree/master/files/METAScenario/scripts) which implement the xain specific execution of a transaction. They are connected with the [`scenario_slave`](https://github.com/BPChain/private-xain/blob/master/files/METAScenario/scripts/python_sources/implementation/slave.py)
+
+
+
+
 3. [`master`](./python_sources/master) contains the main entry point to start the 
 [`scenario-orchestration-service`](https://github.com/BPChain/scenario-orchestration-service) which 
 listens for input from the [`private-chain-controller` ](https://github.com/BPChain/private-chain-controller)
