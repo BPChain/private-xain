@@ -26,15 +26,11 @@ listens for input from the [`private-chain-controller` ](https://github.com/BPCh
 at port 22000. 
 
 ### bootstrap files
+1. [`Blockchain genesis file`](https://github.com/BPChain/private-xain/tree/master/files/blockchain_files) which includes the genesis.json to initialize the blockchain
 
 ### Docker Setup
 Both slave and master share one dockerfile but are defined as different services with different 
 entry points in the docker-compose file. You can simply scale slaves at any time. Masternodes 
 should not be scaled. 
 Run e.g. docker-compose up --build scale slavenode=15
-
-
-
-##### Miscellaneous
-This Multichain setup is not recommended for production. Anyone can control the nodes.
 
