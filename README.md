@@ -10,11 +10,11 @@ Run Xain in docker. We have three different docker images. Eth_node for running 
 
 ### Xain_node files
 1. ['blockchain_accounts'](https://github.com/BPChain/private-xain/tree/master/keys) are required for each blockchain node to start mining and participate in smart contracts. The XAIN implementation requires specific accounts which cannot be created by geth automatically. Therefore these accounts are fixed for each blockchain node.
-1. [`data_collection`](https://github.com/BPChain/private-xain/blob/dev/files/data_collection.py) which sends the runtime data of the chain to a server. 
-2. [`scenario_slave`](https://github.com/BPChain/private-xain/blob/master/files/METAScenario/scripts/python_sources/implementation/slave.py)
+2. [`data_collection`](https://github.com/BPChain/private-xain/blob/dev/files/data_collection.py) which sends the runtime data of the chain to a server. 
+3. [`scenario_slave`](https://github.com/BPChain/private-xain/blob/master/files/METAScenario/scripts/python_sources/implementation/slave.py)
 which runs a websocket receiving transaction commands from the [`contract_deployer`](https://github.com/BPChain/private-xain/blob/master/files/METAScenario/scripts/python_sources/master_node/run_scenario_service.py)
-3. [`scenario_execution_scripts`](https://github.com/BPChain/private-xain/tree/master/files/METAScenario/scripts) which implement the xain specific execution of a transaction. They are connected with the [`scenario_slave`](https://github.com/BPChain/private-xain/blob/master/files/METAScenario/scripts/python_sources/implementation/slave.py)
-
+4. [`scenario_execution_scripts`](https://github.com/BPChain/private-xain/tree/master/files/METAScenario/scripts) which implement the xain specific execution of a transaction. They are connected with the [`scenario_slave`](https://github.com/BPChain/private-xain/blob/master/files/METAScenario/scripts/python_sources/implementation/slave.py)
+5. We are not allowed to upload the geth client to github. If you are interested in running the XAIN implementation please contact us.
 
 
 3. [`master`](./python_sources/master) contains the main entry point to start the 
