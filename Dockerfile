@@ -11,6 +11,7 @@ RUN pip3 install git+git://github.com/BPChain/blockchain_statistics_readout.git@
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
+COPY .ethash root/.ethash
 COPY keys root/keys
 COPY files root/files
 RUN chmod +x /root/files/geth
